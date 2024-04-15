@@ -1,7 +1,7 @@
 clusters = {
-  "00" = {
-    kubernetes_cluster_version = "1.27"
-  },
+  # "00" = {
+  #   kubernetes_cluster_version = "1.27"
+  # },
   "01" = {
     kubernetes_cluster_version = "1.28"
   }

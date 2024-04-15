@@ -9,13 +9,13 @@ steps:
 - checkout: cnp-flux-config
 - template: steps/keyvault-read.yaml@cnp-azuredevops-libraries
   parameters:
-    serviceConnection: $(serviceConnection)
+    serviceConnection: ${{ parameters.serviceConnection }}
     environment: ${{ parameters.environment }}
 
 - task: AzureCLI@1
   displayName: 'Setup Authentication'
   inputs:
-      azureSubscription: $(serviceConnection)
+      azureSubscription: ${{ parameters.serviceConnection }}
       addSpnToEnvironment: true
       scriptLocation: inlineScript
       failOnStandardError: 'true'
@@ -43,9 +43,9 @@ steps:
 - task: AzureCLI@1
   displayName: 'Bootstrap'
   inputs:
-    azureSubscription: $(serviceConnection)
+    azureSubscription: ${{ parameters.serviceConnection }}
     addSpnToEnvironment: true
     scriptType: shell
     failOnStandardError: 'false'
     scriptPath: aks-cft-deploy/bootstrap/bootstrap.sh
-    arguments: ${{ parameters.project }} aks $(env) $(controlKeyVault) $(serviceConnection) "$(clusters)" deploy ${{ parameters.akskeyvault }} ${{parameters.terraformSubscriptionID}}
+    arguments: ${{ parameters.project }} aks $(env) $(controlKeyVault) ${{ parameters.serviceConnection }} "$(clusters)" deploy ${{ parameters.akskeyvault }} ${{parameters.terraformSubscriptionID}}
