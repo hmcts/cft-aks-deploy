@@ -115,6 +115,8 @@ module "kubernetes" {
   project_acr_enabled = var.project_acr_enabled
   availability_zones  = var.availability_zones
 
+  azure_policy_enabled = var.env == "sbox" ? true : false
+
   enable_automatic_channel_upgrade_patch = var.enable_automatic_channel_upgrade_patch
 
   enable_node_os_channel_upgrade_nodeimage = true
