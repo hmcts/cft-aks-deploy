@@ -27,7 +27,7 @@ parameters:
   - name: action
     displayName: Action
     type: string
-    default: plan
+    default: ${{ if eq(variables['isMain'], true) && eq(variables['isAutoTriggered'], 'true'), 'apply', 'plan' }}
     values:
       - plan
       - apply
